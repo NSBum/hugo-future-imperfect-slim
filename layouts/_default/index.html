@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="{{ .Page.Language | default " en " }}">
+{{ partial "head" . }}
+
+<body>
+    {{ partial "site-header" . }}
+    <div id="wrapper">
+        {{ partial "site-intro" . }}
+        <main id="site-main">
+            <article class="post">
+                <header>
+                    <div class="title">
+                        {{ if $.Scratch.Get "h1" }}
+                        <h1><a href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
+                        {{ $.Scratch.Set "h1" false }} {{ else }}
+                        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+                        {{ end }} {{ with .Description }}
+                        <p>{{ . }}</p>{{ end }}
+                    </div>
+                </header>
+                <div id="content">
+                    {{ .Content }}
+                </div>
+                <div class="two-col-container">
+                    <div class="two-col-item">
+                        <h4>Most popular</h4>
+                        <ul>
+                        {{ range sort .Site.Data.curated.popular ".weight" "desc" }}
+                            <li><a href="{{ .url }}">{{ .name }}</a></li>
+                        {{ end }}
+                        </ul>
+                    </div>
+                    <div class="two-col-item">
+                        <h4>Notable</h4>
+                        <ul>
+                        {{ range sort .Site.Data.curated.notable ".weight" "desc" }}
+                            <li><a href="{{ .url }}">{{ .name }}</a></li>
+                        {{ end }}
+                        </ul>
+                    </div>
+                    <div class="two-col-span">
+                        <hr>
+                        <h3>Selected articles by topic</h3>
+                    </div>
+                    <div class="two-col-item">
+                        <h4>Listening</h4>
+                        <ul>
+                        {{ range sort .Site.Data.curated.listening ".weight" "desc" }}
+                            <li><a href="{{ .url }}">{{ .name }}</a></li>
+                        {{ end }}
+                        </ul>
+                    </div>
+                    <div class="two-col-item">
+                        <h4>Deliberate Practice</h4>
+                        <ul>
+                        {{ range sort .Site.Data.curated.deliberate ".weight" "asc" }}
+                            <li><a href="{{ .url }}">{{ .name }}</a></li>
+                        {{ end }}
+                        </ul>
+                    </div>
+                    <div class="two-col-item">
+                        <h4>Psychology/Emotional</h4>
+                        <ul>
+                        {{ range sort .Site.Data.curated.psychology ".weight" "asc" }}
+                            <li><a href="{{ .url }}">{{ .name }}</a></li>
+                        {{ end }}
+                        </ul>
+                    </div>
+                    <div class="two-col-item">
+                        <h4>Practice Techniques</h4>
+                        <ul>
+                        {{ range sort .Site.Data.curated.practice ".weight" "asc" }}
+                            <li><a href="{{ .url }}">{{ .name }}</a></li>
+                        {{ end }}
+                        </ul>
+                    </div>
+                    <div class="two-col-item">
+                        <h4>Book Reviews</h4>
+                        <ul>
+                        {{ range sort .Site.Data.curated.book ".weight" "asc" }}
+                            <li><a href="{{ .url }}">{{ .name }}</a></li>
+                        {{ end }}
+                        </ul>
+                    </div>
+                    <div class="two-col-item">
+                        <h4>Suzuki Method</h4>
+                        <ul>
+                        {{ range sort .Site.Data.curated.method ".weight" "asc" }}
+                            <li><a href="{{ .url }}">{{ .name }}</a></li>
+                        {{ end }}
+                        </ul>
+                    </div>
+                    <div class="two-col-span">
+                        <hr>
+                        <h3>Selected Resources</h3>
+                    </div>
+                    <div class="two-col-item">
+                        <h4>Blogs</h4>
+                        <ul>
+                        {{ range sort .Site.Data.resources.blogs ".weight" "asc" }}
+                            <li><a href="{{ .url }}">{{ .name }}</a> <span class="lt-span">- {{ .summary }}</span></li>
+                        {{ end }}
+                        </ul>
+                    </div>
+                    <div class="two-col-item">
+                        <h4>Podcasts</h4>
+                        <ul>
+                        {{ range sort .Site.Data.resources.podcasts ".weight" "asc" }}
+                            <li><a href="{{ .url }}">{{ .name }}</a> <span class="lt-span">- {{ .summary }}</span></li>
+                        {{ end }}
+                        </ul>
+                    </div>
+                    <div class="two-col-item">
+                        <h4>References</h4>
+                        <ul>
+                        {{ range sort .Site.Data.resources.links ".weight" "asc" }}
+                            <li><a href="{{ .url }}">{{ .name }}</a> <span class="lt-span">- {{ .summary }}</span></li>
+                        {{ end }}
+                        </ul>
+                    </div>
+                    <div class="two-col-item">
+                        <h4>Summer Institutes</h4>
+                        <ul>
+                        {{ range sort .Site.Data.resources.summer ".weight" "asc" }}
+                            <li>
+                                {{ if .isnew }}
+                                    <span style="color:red;"><i class="far fa-lightbulb"></i>&nbsp;</span>
+                                {{ end }}
+                                {{ if .isexternal }}
+                                    <span style="color:#3db8ca;"><i class="fas fa-external-link-alt"></i></span>
+                                {{ end }}
+                                <a href="{{ .url }}">{{ .name }}</a>
+                                {{ if .summary }}
+                                    <span class="lt-span">- {{ .summary }}</span>
+                                {{ end }}
+                            </li>
+                        {{ end }}
+                        </ul>
+                    </div>
+                    <div class="two-col-item">
+                        <h4>Organizations</h4>
+                        <ul>
+                        {{ range sort .Site.Data.resources.organizations ".weight" "asc" }}
+                            <li><a href="{{ .url }}">{{ .name }}</a></li>
+                        {{ end }}
+                        </ul>
+                    </div>
+                    </div>
+            </article>
+        </main>
+        {{ partial "site-sidebar" . }} {{ partial "site-footer" . }} {{ partial "scripts" . }}
+    </div>
+</body>
+
+</html>
