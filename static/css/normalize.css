@@ -347,3 +347,18 @@ template {
 [hidden] {
   display: none;
 }
+
+/* .two-col-container {
+  display: grid;
+  grid-column-gap: 5px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  padding: 5px;
+} */
+
+.emphasize-link {
+	font-weight: 600;
+}
+
+.lt-span {
+	color: silver;
+}
