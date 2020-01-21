@@ -33,7 +33,7 @@
                     <div class="two-col-item">
                         <h4>Notable</h4>
                         <ul>
-                        {{ range sort .Site.Data.curated.notable ".weight" "desc" }}
+                        {{ range sort .Site.Data.curated.notable ".weight" "asc" }}
                             <li><a href="{{ .url }}">{{ .name }}</a></li>
                         {{ end }}
                         </ul>
